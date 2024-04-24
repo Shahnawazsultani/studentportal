@@ -1,0 +1,141 @@
+{% include "../index.html" %} {% block body %}
+<div class="container">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img
+                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                alt="Admin"
+                class="rounded-circle"
+                width="150"
+              />
+              <div class="mt-3">
+                <h4>@{{ user.username }}</h4>
+                <p class="text-secondary mb-1">
+                  {{user.first_name}} {{user.last_name}}
+                </p>
+                <p class="text-muted font-size-sm">{{user.email}}</p>
+                <p>Student Id:<code class="k"> {{user.student_id}}</code> </p>
+
+                <button
+                  class="btn btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#profileModal"
+                >
+                  Update Info
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Username</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{user.username}}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{user.first_name}} {{user.last_name}}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{user.email}}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-12 d-flex justify-content-center">
+                <button
+                  class="btn btn-primary w-50"
+                  data-bs-toggle="modal"
+                  data-bs-target="#profileModal"
+                >
+                  Edit Profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row gutters-sm">
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                {% if invoices %}
+                <h6 class="d-flex align-items-center mb-3">
+                  <i class="material-icons text-primary">Your All Invoices</i>
+                </h6>
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Reference</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Status</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    {% for invoice in invoices %}
+                    <tr>
+                      <td scope="row">{{invoice.reference}}</td>
+                      <td>{{invoice.amount}}</td>
+                      <td>{{invoice.status}}</td>
+                      
+                    </tr>
+                    {% endfor %}
+                 
+                  </tbody>
+                </table>
+                {% else %}
+                <h5 class="text-center">No invoice Found for you</h5>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="d-flex align-items-center mb-3">
+
+                  <i class="material-icons text-primary mr-2">Library Account Info </i>
+                </h6>
+                <small>Student ID: </small>
+                <code>
+                  {{user.student_id}}
+                </code> <br>
+                <small>Default PIN: </small>
+                <code>
+                  000000
+                </code> <br>
+                <small>Account Not Found ? <a href="{% url "libraryAccountCreate" %}">Create Account</a></small>
+           
+                
+           
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

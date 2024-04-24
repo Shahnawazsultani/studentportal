@@ -1,0 +1,41 @@
+{% include "../index.html" %}
+{% block body %}
+
+<div class="container">
+  <div class="bg-white card mt-4 order-list shadow-sm">
+    <div class="gold-members p-4">
+      <div class="media">
+        <div class="media-body">
+          <span class="float-end text-info">Posted:  {{course.enrolledDate|timesince}} ago <i
+              class="icofont-check-circled text-success"></i></span>
+          <h6 class="mb-2">
+            <a href="#"></a>
+            <a href="#" class="text-primary text-decoration-none">{{course.title }}</a>
+          </h6>
+          <p class="text-dark"> {{course.description}}</p>
+          <hr>
+          <div class="float-end w-25">
+            {% if enrolled %}
+            <a class="btn btn-outline-primary w-100" href="{% url "cancelEnrollment" course.id %}"><i class="icofont-headphone-alt"></i>
+              Cancel Enrollment</a>
+              {% else %}
+              <a class="btn btn-outline-primary w-100" href="{% url "enrollCourse" course.id %}"><i class="icofont-headphone-alt"></i>
+                ENROLL NOW</a>
+              {% endif %}
+           
+          </div>
+          {% if enrolled %}
+          <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold"> Reference ID:</span> <strong>{{enrolled.reference}} </strong> Pay it <a href="http://localhost:8081/portal" target='_blank'>here</a>
+          </p>
+          
+          {% endif %}
+          <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold"> Course
+              Fee:</span> <strong> ${{course.amount}} </strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
